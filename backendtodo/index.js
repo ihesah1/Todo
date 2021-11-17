@@ -34,8 +34,29 @@ app.get("/todos",async(req,res)=>{ ///////read
             res.json({id,task})
         })
 
-})
 
+app.get("/todos/:id",async(req,res)=>{ ///////read
+    const {id}=req.params;
+    res.status(200)
+    res.json(todos)
+       });
+   ////create    
+ app.post("/create/:id",(req,res)=>{
+       const{id,task}= req.body
+        //const newTask ={id: req.body.id, task:req.body.task} >> jsx
+        todos.push({id,task});
+               res.status(201);
+               res.json({id,task})
+           })
+   
+app.delete("/deleteTodo", (req, res) => {
+  let result = req.body
+   DeleteData.deleteTodo(result, (todos) => {
+   res.json(todos)
+            })
+        
+        })
+   
 //routers
 
 const PORT = process.env.PORT || 4000;
